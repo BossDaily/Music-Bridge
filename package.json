@@ -1,0 +1,20 @@
+{
+  "name": "music-bridge",
+  "version": "1.0.0",
+  "description": "TypeScript Hono + Astro monorepo with Docker support",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter web dev\"",
+    "build": "pnpm --filter backend build && pnpm --filter web build",
+    "start": "pnpm --filter backend start",
+    "clean": "pnpm --filter backend clean && pnpm --filter web clean",
+    "type-check": "pnpm --filter backend type-check && pnpm --filter web type-check",
+    "lint": "pnpm --filter backend lint && pnpm --filter web lint"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "concurrently": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "pnpm@8.0.0"
+}
