@@ -1,7 +1,7 @@
-import { Hono } from 'hono'
-import { logger } from 'hono/logger'
-import { cors } from 'hono/cors'
-import { serve } from '@hono/node-server'
+const { Hono } = require('hono');
+const { logger } = require('hono/logger');
+const { cors } = require('hono/cors');
+const { serve } = require('@hono/node-server');
 
 const app = new Hono()
 
