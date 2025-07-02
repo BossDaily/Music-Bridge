@@ -12,7 +12,7 @@
     "lint": "pnpm --filter backend lint && pnpm --filter web lint"
   },
   "devDependencies": {
-    "@types/node": "^20.19.1",
+    "@types/node": "^20.19.4",
     "concurrently": "^8.2.2",
     "typescript": "^5.8.3"
   },

@@ -12,13 +12,13 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "@hono/node-server": "^1.14.4",
+    "@hono/node-server": "^1.15.0",
     "cors": "^2.8.5",
     "hono": "^4.8.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
-    "@types/node": "^20.19.1",
+    "@types/node": "^20.19.4",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.57.1",
