@@ -1,17 +1,10 @@
 ---
-import Dashboard from '../../components/Dashboard';
-import '../../styles/global.css';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Music Bridge - Dashboard Prototype</title>
-	</head>
-	<body class="bg-gray-50">
-		<Dashboard client:load />
-	</body>
-</html>
+<DashboardLayout pageTitle="Prototype">
+	<div class="p-4">
+		<h1 class="text-2xl font-bold">Prototype</h1>
+		<p>This is a prototype page.</p>
+	</div>
+</DashboardLayout>

@@ -1,7 +1,7 @@
 ---
-import { SidebarProvider, SidebarInset, SidebarTrigger } from '../components/ui/sidebar';
-import { DashboardSidebar } from '../components/DashboardSidebar';
+import { DashboardLayoutWrapper } from '@/components/DashboardLayoutWrapper';
 import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube } from 'lucide-react';
+import '@/styles/global.css';
 
 // Navigation items for the sidebar
 const navigationItems = [
@@ -43,11 +43,6 @@ const navigationItems = [
 ];
 
 const { pageTitle } = Astro.props;
-
-const updatedNavigationItems = navigationItems.map(item => ({
-  ...item,
-  isActive: item.title === pageTitle
-}));
 ---
 
 <html lang="en">
@@ -59,16 +54,14 @@ const updatedNavigationItems = navigationItems.map(item => ({
     <title>{pageTitle}</title>
   </head>
   <body>
-    <SidebarProvider>
-      <DashboardSidebar
-        navigationItems={updatedNavigationItems}
-        userName="BossDaily"
-        userEmail="boss@example.com"
-        client:load
-      />
-      <SidebarInset client:load>
-        <slot />
-      </SidebarInset>
-    </SidebarProvider>
+    <DashboardLayoutWrapper
+      navigationItems={navigationItems}
+      userName="BossDaily"
+      userEmail="boss@example.com"
+      pageTitle={pageTitle}
+      client:load
+    >
+      <slot />
+    </DashboardLayoutWrapper>
   </body>
 </html>
