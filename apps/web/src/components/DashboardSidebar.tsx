@@ -86,7 +86,7 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
             <SidebarMenu>
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={item.isActive}>
+                  <SidebarMenuButton asChild>
                     <a href={item.url}>
                       {typeof item.icon === "string" ? (
                         <span>{item.icon}</span>
