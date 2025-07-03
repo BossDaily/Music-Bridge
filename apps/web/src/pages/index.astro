@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -103,7 +104,7 @@
 					if (apiStatusDiv) {
 						apiStatusDiv.innerHTML = `
 							<div class="p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-								❌ Backend Connection Failed: ${error.message}
+								❌ Backend Connection Failed: ${error instanceof Error ? error.message : String(error)}
 							</div>
 						`;
 					}
