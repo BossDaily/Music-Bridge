@@ -1,0 +1,74 @@
+---
+import { SidebarProvider, SidebarInset, SidebarTrigger } from '../components/ui/sidebar';
+import { DashboardSidebar } from '../components/DashboardSidebar';
+import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube } from 'lucide-react';
+
+// Navigation items for the sidebar
+const navigationItems = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: TrendingUp,
+  },
+  {
+    title: "Global Playlists",
+    url: "#",
+    icon: Music,
+  },
+  {
+    title: "Sync Manager",
+    url: "#",
+    icon: RotateCcw,
+  },
+  {
+    title: "Transfer Tool",
+    url: "#",
+    icon: Shuffle,
+  },
+  {
+    title: "Connected Services",
+    url: "#",
+    icon: Users,
+  },
+  {
+    title: "Settings",
+    url: "#",
+    icon: Settings,
+  },
+  {
+    title: "Prototype",
+    url: "/dashboard/prototype",
+    icon: TestTube,
+  },
+];
+
+const { pageTitle } = Astro.props;
+
+const updatedNavigationItems = navigationItems.map(item => ({
+  ...item,
+  isActive: item.title === pageTitle
+}));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <SidebarProvider>
+      <DashboardSidebar
+        navigationItems={updatedNavigationItems}
+        userName="BossDaily"
+        userEmail="boss@example.com"
+        client:load
+      />
+      <SidebarInset client:load>
+        <slot />
+      </SidebarInset>
+    </SidebarProvider>
+  </body>
+</html>
