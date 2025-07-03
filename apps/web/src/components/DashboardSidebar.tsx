@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,20 +12,53 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from '@/components/ui/sidebar';
+} from "@/components/ui/sidebar";
 
 interface DashboardSidebarProps {
-  navigationItems: {
-    title: string;
-    url: string;
-    icon: React.ElementType;
-    isActive?: boolean;
-  }[];
   userName: string;
   userEmail: string;
 }
+type SidebarProps = DashboardSidebarProps & React.ComponentProps<typeof Sidebar>;
 
-export function DashboardSidebar({ navigationItems, userName, userEmail, ...props }: DashboardSidebarProps & React.ComponentProps<typeof Sidebar>) {
+export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps) {
+  // Define navigationItems here so icons are valid React components
+  const navigationItems = [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: TrendingUp,
+    },
+    {
+      title: "Global Playlists",
+      url: "#",
+      icon: Music,
+    },
+    {
+      title: "Sync Manager",
+      url: "#",
+      icon: RotateCcw,
+    },
+    {
+      title: "Transfer Tool",
+      url: "#",
+      icon: Shuffle,
+    },
+    {
+      title: "Connected Services",
+      url: "#",
+      icon: Users,
+    },
+    {
+      title: "Settings",
+      url: "#",
+      icon: Settings,
+    },
+    {
+      title: "Prototype",
+      url: "/dashboard/prototype",
+      icon: TestTube,
+    },
+  ];
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
@@ -54,7 +88,11 @@ export function DashboardSidebar({ navigationItems, userName, userEmail, ...prop
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={item.isActive}>
                     <a href={item.url}>
-                      <item.icon />
+                      {typeof item.icon === "string" ? (
+                        <span>{item.icon}</span>
+                      ) : (
+                        item.icon ? React.createElement(item.icon) : null
+                      )}
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>

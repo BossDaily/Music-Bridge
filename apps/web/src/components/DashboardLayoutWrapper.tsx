@@ -6,7 +6,7 @@ import { Badge } from './ui/badge';
 interface NavigationItem {
   title: string;
   url: string;
-  icon: React.ElementType;
+  icon: React.ElementType | string;
   isActive?: boolean;
 }
 
