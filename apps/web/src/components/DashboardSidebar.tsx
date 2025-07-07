@@ -14,6 +14,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { ModeToggle } from "./ModeToggle";
 
 interface DashboardSidebarProps {
   userName: string;
@@ -76,7 +77,9 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
                 </div>
               </a>
             </SidebarMenuButton>
-            {/* <SidebarTrigger className="-ml-1" /> */}
+            <div className="ml-auto">
+              <ModeToggle />
+            </div>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
