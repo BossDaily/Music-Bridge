@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube } from "lucide-react";
+import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube, Home } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,6 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 interface DashboardSidebarProps {
@@ -24,9 +25,9 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
   // Define navigationItems here so icons are valid React components
   const navigationItems = [
     {
-      title: "Dashboard",
+      title: "Home",
       url: "/dashboard",
-      icon: TrendingUp,
+      icon: Home,
     },
     {
       title: "Global Playlists",
@@ -63,7 +64,7 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
     <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem>
+          <SidebarMenuItem className="flex items-center">
             <SidebarMenuButton size="lg" asChild>
               <a href="#" className="font-semibold">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
@@ -75,6 +76,7 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
                 </div>
               </a>
             </SidebarMenuButton>
+            {/* <SidebarTrigger className="-ml-1" /> */}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
