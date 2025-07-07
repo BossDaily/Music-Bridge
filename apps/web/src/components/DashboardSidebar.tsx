@@ -23,7 +23,7 @@ export function DashboardSidebar({ ...props }: SidebarProps) {
   const navigationItems = [
     {
       title: "Home",
-      url: "/dashboard",
+      url: "/test-dashboard",
       icon: Home,
     },
     {
@@ -53,7 +53,7 @@ export function DashboardSidebar({ ...props }: SidebarProps) {
     },
     {
       title: "Prototype",
-      url: "/dashboard/prototype",
+      url: "/test-dashboard/prototype",
       icon: TestTube,
     },
   ];
