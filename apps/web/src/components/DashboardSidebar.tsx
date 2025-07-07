@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube, Home } from "lucide-react";
 import {
   Sidebar,
@@ -15,10 +15,15 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 
-interface DashboardSidebarProps {}
+
+interface DashboardSidebarProps {
+  urlPathname: string;
+}
 type SidebarProps = DashboardSidebarProps & React.ComponentProps<typeof Sidebar>;
 
-export function DashboardSidebar({ ...props }: SidebarProps) {
+export function DashboardSidebar({ urlPathname, ...props }: SidebarProps) {
+
+
   // Define navigationItems here so icons are valid React components
   const navigationItems = [
     {
@@ -84,7 +89,7 @@ export function DashboardSidebar({ ...props }: SidebarProps) {
             <SidebarMenu>
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton isActive={item.url === urlPathname} asChild>
                     <a href={item.url}>
                       {typeof item.icon === "string" ? (
                         <span>{item.icon}</span>

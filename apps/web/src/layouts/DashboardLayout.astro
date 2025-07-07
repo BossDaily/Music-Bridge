@@ -43,6 +43,7 @@ const navigationItems = [
 ];
 
 const { pageTitle } = Astro.props;
+const urlPathname = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -80,6 +81,7 @@ const { pageTitle } = Astro.props;
       userName="BossDaily"
       userEmail="boss@example.com"
       pageTitle={pageTitle}
+      urlPathname={urlPathname}
       client:load
     >
       <slot />

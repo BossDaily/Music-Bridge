@@ -26,6 +26,7 @@ interface DashboardLayoutWrapperProps {
   userEmail: string;
   pageTitle: string;
   children: React.ReactNode;
+  urlPathname: string;
 }
 
 export function DashboardLayoutWrapper({
@@ -34,6 +35,7 @@ export function DashboardLayoutWrapper({
   userEmail,
   pageTitle,
   children,
+  urlPathname,
 }: DashboardLayoutWrapperProps) {
   const updatedNavigationItems = navigationItems.map((item) => ({
     ...item,
@@ -44,6 +46,7 @@ export function DashboardLayoutWrapper({
     <SidebarProvider>
       <DashboardSidebar
         navigationItems={updatedNavigationItems}
+        urlPathname={urlPathname}
       />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
