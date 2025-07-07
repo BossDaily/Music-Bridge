@@ -2,6 +2,16 @@ import React from 'react';
 import { SidebarProvider, SidebarInset, SidebarTrigger } from './ui/sidebar';
 import { DashboardSidebar } from './DashboardSidebar';
 import { Badge } from './ui/badge';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ModeToggle } from "./ModeToggle";
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 interface NavigationItem {
   title: string;
@@ -34,8 +44,6 @@ export function DashboardLayoutWrapper({
     <SidebarProvider>
       <DashboardSidebar
         navigationItems={updatedNavigationItems}
-        userName={userName}
-        userEmail={userEmail}
       />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
@@ -44,6 +52,23 @@ export function DashboardLayoutWrapper({
             <Badge variant="secondary" className="text-xs">
               PROTOTYPE
             </Badge>
+            <ModeToggle />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </header>
         {children}

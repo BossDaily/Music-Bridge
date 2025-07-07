@@ -14,15 +14,11 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { ModeToggle } from "./ModeToggle";
 
-interface DashboardSidebarProps {
-  userName: string;
-  userEmail: string;
-}
+interface DashboardSidebarProps {}
 type SidebarProps = DashboardSidebarProps & React.ComponentProps<typeof Sidebar>;
 
-export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps) {
+export function DashboardSidebar({ ...props }: SidebarProps) {
   // Define navigationItems here so icons are valid React components
   const navigationItems = [
     {
@@ -77,9 +73,6 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
                 </div>
               </a>
             </SidebarMenuButton>
-            <div className="ml-auto">
-              <ModeToggle />
-            </div>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
@@ -107,22 +100,6 @@ export function DashboardSidebar({ userName, userEmail, ...props }: SidebarProps
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-accent-foreground">
-                👤
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{userName}</span>
-                <span className="truncate text-xs">{userEmail}</span>
-              </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
 
       <SidebarRail />
     </Sidebar>
