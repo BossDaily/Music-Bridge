@@ -52,6 +52,7 @@ export function DashboardLayoutWrapper({
   }, [updatedNavigationItems, pageTitle, urlPathname]);
 
   return (
+    <ErrorBoundary>
     <SidebarProvider>
       <DashboardSidebar
         navigationItems={updatedNavigationItems}
@@ -83,10 +84,9 @@ export function DashboardLayoutWrapper({
             </DropdownMenu>
           </div>
         </header>
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
       </SidebarInset>
     </SidebarProvider>
+    </ErrorBoundary>
   );
 }

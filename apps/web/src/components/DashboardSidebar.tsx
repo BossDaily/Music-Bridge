@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { TrendingUp, Music, RotateCcw, Shuffle, Users, Settings, TestTube, Home } from "lucide-react";
+import {
+  TrendingUp,
+  Music,
+  RotateCcw,
+  Shuffle,
+  Users,
+  Settings,
+  TestTube,
+  Home,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +23,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-
+import ErrorBoundary from "./ErrorBoundary";
 
 interface DashboardSidebarProps {
   urlPathname: string;
@@ -26,54 +35,70 @@ interface DashboardSidebarProps {
     isActive?: boolean;
   }[];
 }
-type SidebarProps = DashboardSidebarProps & Omit<React.ComponentProps<typeof Sidebar>, 'children'>;
+type SidebarProps = DashboardSidebarProps &
+  Omit<React.ComponentProps<typeof Sidebar>, "children">;
 
-export function DashboardSidebar({ urlPathname, navigationItems, ...props }: SidebarProps) {
+export function DashboardSidebar({
+  urlPathname,
+  navigationItems,
+  ...props
+}: SidebarProps) {
   return (
-    <Sidebar variant="inset" collapsible="icon" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem className="flex items-center">
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#" className="font-semibold">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  🎵
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Music Bridge</span>
-                  <span className="truncate text-xs">Dashboard</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+    <ErrorBoundary>
+      <Sidebar variant="inset" collapsible="icon" {...props}>
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem className="flex items-center">
+              <SidebarMenuButton size="lg" asChild>
+                <a href="#" className="font-semibold">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                    🎵
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">Music Bridge</span>
+                    <span className="truncate text-xs">Dashboard</span>
+                  </div>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
 
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {navigationItems.map((item, index) => (
-                <SidebarMenuItem key={`nav-${item.id}-${index}`}>
-                  <SidebarMenuButton isActive={item.url === urlPathname} asChild>
-                    <a href={item.url}>
-                      {typeof item.icon === "string" ? (
-                        <span key={`icon-string-${item.id}`}>{item.icon}</span>
-                      ) : typeof item.icon === "function" ? (
-                        React.createElement(item.icon, { key: `icon-component-${item.id}` })
-                      ) : null}
-                      <span key={`title-${item.id}`}>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+        <SidebarContent>
+          <ErrorBoundary>
+            <SidebarGroup>
+              <SidebarGroupLabel>Application</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {navigationItems.map((item, index) => (
+                    <SidebarMenuItem key={`nav-${item.id}-${index}`}>
+                      <SidebarMenuButton
+                        isActive={item.url === urlPathname}
+                        asChild
+                      >
+                        <a href={item.url}>
+                          {typeof item.icon === "string" ? (
+                            <span key={`icon-string-${item.id}`}>
+                              {item.icon}
+                            </span>
+                          ) : typeof item.icon === "function" ? (
+                            React.createElement(item.icon, {
+                              key: `icon-component-${item.id}`,
+                            })
+                          ) : null}
+                          <span key={`title-${item.id}`}>{item.title}</span>
+                        </a>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </ErrorBoundary>
+        </SidebarContent>
 
-      <SidebarRail />
-    </Sidebar>
+        <SidebarRail />
+      </Sidebar>
+    </ErrorBoundary>
   );
 }
