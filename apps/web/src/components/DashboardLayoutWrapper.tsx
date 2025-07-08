@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./ModeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import ErrorBoundary from './ErrorBoundary';
 
 interface NavigationItem {
+  id: string;
   title: string;
   url: string;
   icon: React.ElementType | string;
@@ -74,7 +76,9 @@ export function DashboardLayoutWrapper({
             </DropdownMenu>
           </div>
         </header>
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </SidebarInset>
     </SidebarProvider>
   );

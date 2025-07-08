@@ -1,16 +1,16 @@
 import React from "react";
-import { 
-  Music, 
-  Play, 
-  Clock, 
-  CheckCircle, 
-  Shuffle, 
-  RotateCcw, 
-  Plus,
-  ExternalLink,
-  Headphones,
-  TrendingUp
-} from "lucide-react";
+// import { 
+//   Music, 
+//   Play, 
+//   Clock, 
+//   CheckCircle, 
+//   Shuffle, 
+//   RotateCcw, 
+//   Plus,
+//   ExternalLink,
+//   Headphones,
+//   TrendingUp
+// } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -121,7 +121,7 @@ const getSyncStatusBadge = (status: string) => {
 
 export function DashboardHome() {
   return (
-    <div className="min-h-screen bg-background space-y-8">
+    <div className="min-h-screen bg-background space-y-8 p-6">
       {/* Dynamic Welcome Banner */}
       <div className="w-full">
         <Card className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 overflow-hidden">
@@ -176,13 +176,13 @@ export function DashboardHome() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center space-x-2">
-                  <Music className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  {/* <Music className="w-4 h-4 text-muted-foreground flex-shrink-0" /> */}
                   <span className="text-sm text-muted-foreground truncate">
                     {playlist.sources.join(" • ")}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Clock className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  {/* <Clock className="w-4 h-4 text-muted-foreground flex-shrink-0" /> */}
                   <span className="text-sm text-muted-foreground">
                     {playlist.lastSync}
                   </span>
@@ -209,9 +209,7 @@ export function DashboardHome() {
                       {service.logo}
                     </div>
                     <div className={`absolute -bottom-1 -right-1 w-5 h-5 lg:w-6 lg:h-6 rounded-full border-2 border-background ${getServiceStatusColor(service.status)}`}>
-                      {service.status === "connected" && (
-                        <CheckCircle className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-white m-1 lg:m-0.5" />
-                      )}
+                      <span className="sr-only">Connected</span>
                     </div>
                   </div>
                   <div>
@@ -249,7 +247,7 @@ export function DashboardHome() {
           <Card className="hover:shadow-lg transition-all duration-200 cursor-pointer group border-2 hover:border-primary/50">
             <CardContent className="p-6 lg:p-8 text-center">
               <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                <Shuffle className="w-7 h-7 lg:w-8 lg:h-8 text-blue-600" />
+                {/* <Shuffle className="w-7 h-7 lg:w-8 lg:h-8 text-blue-600" /> */}
               </div>
               <h3 className="text-lg lg:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                 Initiate a Transfer
@@ -259,7 +257,7 @@ export function DashboardHome() {
               </p>
               <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors w-full lg:w-auto">
                 Start Transfer
-                <ExternalLink className="w-4 h-4 ml-2" />
+                {/* <ExternalLink className="w-4 h-4 ml-2" /> */}
               </Button>
             </CardContent>
           </Card>
@@ -267,7 +265,7 @@ export function DashboardHome() {
           <Card className="hover:shadow-lg transition-all duration-200 cursor-pointer group border-2 hover:border-primary/50">
             <CardContent className="p-6 lg:p-8 text-center">
               <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-green-500/20 to-green-600/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                <RotateCcw className="w-7 h-7 lg:w-8 lg:h-8 text-green-600" />
+                {/* <RotateCcw className="w-7 h-7 lg:w-8 lg:h-8 text-green-600" /> */}
               </div>
               <h3 className="text-lg lg:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                 Manage Syncs
@@ -277,7 +275,7 @@ export function DashboardHome() {
               </p>
               <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors w-full lg:w-auto">
                 Manage Syncs
-                <ExternalLink className="w-4 h-4 ml-2" />
+                {/* <ExternalLink className="w-4 h-4 ml-2" /> */}
               </Button>
             </CardContent>
           </Card>
@@ -285,7 +283,7 @@ export function DashboardHome() {
           <Card className="hover:shadow-lg transition-all duration-200 cursor-pointer group border-2 hover:border-primary/50">
             <CardContent className="p-6 lg:p-8 text-center">
               <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                <Plus className="w-7 h-7 lg:w-8 lg:h-8 text-purple-600" />
+                {/* <Plus className="w-7 h-7 lg:w-8 lg:h-8 text-purple-600" /> */}
               </div>
               <h3 className="text-lg lg:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                 Create New Global Playlist
@@ -295,7 +293,7 @@ export function DashboardHome() {
               </p>
               <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors w-full lg:w-auto">
                 Create Playlist
-                <Plus className="w-4 h-4 ml-2" />
+                {/* <Plus className="w-4 h-4 ml-2" /> */}
               </Button>
             </CardContent>
           </Card>

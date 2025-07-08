@@ -18,50 +18,17 @@ import {
 
 interface DashboardSidebarProps {
   urlPathname: string;
+  navigationItems: {
+    id: string;
+    title: string;
+    url: string;
+    icon: React.ElementType | string;
+    isActive?: boolean;
+  }[];
 }
-type SidebarProps = DashboardSidebarProps & React.ComponentProps<typeof Sidebar>;
+type SidebarProps = DashboardSidebarProps & Omit<React.ComponentProps<typeof Sidebar>, 'children'>;
 
-export function DashboardSidebar({ urlPathname, ...props }: SidebarProps) {
-
-
-  // Define navigationItems here so icons are valid React components
-  const navigationItems = [
-    {
-      title: "Home",
-      url: "/test-dashboard",
-      icon: Home,
-    },
-    {
-      title: "Global Playlists",
-      url: "#",
-      icon: Music,
-    },
-    {
-      title: "Sync Manager",
-      url: "#",
-      icon: RotateCcw,
-    },
-    {
-      title: "Transfer Tool",
-      url: "#",
-      icon: Shuffle,
-    },
-    {
-      title: "Connected Services",
-      url: "#",
-      icon: Users,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings,
-    },
-    {
-      title: "Prototype",
-      url: "/test-dashboard/prototype",
-      icon: TestTube,
-    },
-  ];
+export function DashboardSidebar({ urlPathname, navigationItems, ...props }: SidebarProps) {
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
@@ -88,14 +55,14 @@ export function DashboardSidebar({ urlPathname, ...props }: SidebarProps) {
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton isActive={item.url === urlPathname} asChild>
                     <a href={item.url}>
                       {typeof item.icon === "string" ? (
                         <span>{item.icon}</span>
-                      ) : (
-                        item.icon ? React.createElement(item.icon) : null
-                      )}
+                      ) : typeof item.icon === "function" ? (
+                        React.createElement(item.icon)
+                      ) : null}
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
