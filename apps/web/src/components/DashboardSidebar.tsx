@@ -54,16 +54,16 @@ export function DashboardSidebar({ urlPathname, navigationItems, ...props }: Sid
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItems.map((item) => (
-                <SidebarMenuItem key={item.id}>
+              {navigationItems.map((item, index) => (
+                <SidebarMenuItem key={`nav-${item.id}-${index}`}>
                   <SidebarMenuButton isActive={item.url === urlPathname} asChild>
                     <a href={item.url}>
                       {typeof item.icon === "string" ? (
-                        <span>{item.icon}</span>
+                        <span key={`icon-string-${item.id}`}>{item.icon}</span>
                       ) : typeof item.icon === "function" ? (
-                        React.createElement(item.icon)
+                        React.createElement(item.icon, { key: `icon-component-${item.id}` })
                       ) : null}
-                      <span>{item.title}</span>
+                      <span key={`title-${item.id}`}>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

@@ -120,6 +120,12 @@ const getSyncStatusBadge = (status: string) => {
 };
 
 export function DashboardHome() {
+  // Debug logging to track rendering
+  React.useEffect(() => {
+    console.log('DashboardHome - Component mounted');
+    console.log('DashboardHome - Mock data:', mockData);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background space-y-8 p-6">
       {/* Dynamic Welcome Banner */}
@@ -178,7 +184,12 @@ export function DashboardHome() {
                 <div className="flex items-center space-x-2">
                   {/* <Music className="w-4 h-4 text-muted-foreground flex-shrink-0" /> */}
                   <span className="text-sm text-muted-foreground truncate">
-                    {playlist.sources.join(" • ")}
+                    {playlist.sources.map((source, index) => (
+                      <React.Fragment key={`${playlist.id}-source-${index}`}>
+                        {index > 0 && " • "}
+                        {source}
+                      </React.Fragment>
+                    ))}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">

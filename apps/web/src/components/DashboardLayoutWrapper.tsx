@@ -39,10 +39,17 @@ export function DashboardLayoutWrapper({
   children,
   urlPathname,
 }: DashboardLayoutWrapperProps) {
-  const updatedNavigationItems = navigationItems.map((item) => ({
+  const updatedNavigationItems = navigationItems.map((item, index) => ({
     ...item,
     isActive: item.title === pageTitle,
   }));
+
+  // Debug logging for key prop issues
+  React.useEffect(() => {
+    console.log('DashboardLayoutWrapper - Navigation Items:', updatedNavigationItems);
+    console.log('DashboardLayoutWrapper - Page Title:', pageTitle);
+    console.log('DashboardLayoutWrapper - URL Pathname:', urlPathname);
+  }, [updatedNavigationItems, pageTitle, urlPathname]);
 
   return (
     <SidebarProvider>
