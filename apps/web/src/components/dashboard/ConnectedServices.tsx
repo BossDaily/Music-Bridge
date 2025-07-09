@@ -32,25 +32,26 @@ export function ConnectedServices({ services }: { services: any[] }) {
             Manage your music streaming platform connections
           </p>
         </div>
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {services.map((service) => (
-              <CarouselItem
-                key={service.id}
-                className="basis-1/2 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5"
-              >
-                <div className="p-1 h-full">
+        <div className="relative overflow-hidden px-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-1">
+              {services.map((service) => (
+                <CarouselItem
+                  key={service.id}
+                  className="pl-1 basis-1/2 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                >
+                  <div className="p-2 h-full">
                   <Card className="hover:shadow-md transition-all duration-200 cursor-pointer group border hover:border-primary/50 h-full">
-                    <CardContent className="p-4 lg:p-6">
-                      <div className="text-center space-y-3 lg:space-y-4">
+                    <CardContent className="p-3 lg:p-4">
+                      <div className="text-center space-y-2 lg:space-y-3">
                         <div className="relative inline-block">
-                          <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-2xl lg:text-3xl mx-auto p-2 lg:p-3">
+                          <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-lg lg:text-xl mx-auto p-2">
                             <img
                               src={service.logo}
                               alt={`${service.name} logo`}
@@ -58,7 +59,7 @@ export function ConnectedServices({ services }: { services: any[] }) {
                             />
                           </div>
                           <div
-                            className={`absolute -bottom-1 -right-1 w-5 h-5 lg:w-6 lg:h-6 rounded-full border-2 border-background ${getServiceStatusColor(
+                            className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 lg:w-5 lg:h-5 rounded-full border-2 border-background ${getServiceStatusColor(
                               service.status
                             )}`}
                           >
@@ -89,10 +90,10 @@ export function ConnectedServices({ services }: { services: any[] }) {
                 </div>
               </CarouselItem>
             ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+          </CarouselContent>            <CarouselPrevious className="-left-8" />
+            <CarouselNext className="-right-8" />
+          </Carousel>
+        </div>
       </section>
     </ErrorBoundary>
   );
