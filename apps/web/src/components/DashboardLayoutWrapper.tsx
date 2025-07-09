@@ -1,7 +1,7 @@
-import React from 'react';
-import { SidebarProvider, useSidebar } from './ui/sidebar';
-import { DashboardSidebar } from './DashboardSidebar';
-import { Badge } from './ui/badge';
+import React from "react";
+import { SidebarProvider, useSidebar } from "./ui/sidebar";
+import { DashboardSidebar } from "./DashboardSidebar";
+import { Badge } from "./ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./ModeToggle";
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { IconMenu2 } from '@tabler/icons-react';
-import ErrorBoundary from './ErrorBoundary';
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { IconMenu2 } from "@tabler/icons-react";
+import ErrorBoundary from "./ErrorBoundary";
 
 interface NavigationItem {
   id: string;
@@ -34,9 +34,12 @@ interface DashboardLayoutWrapperProps {
 
 function MobileHeader() {
   const { setOpen } = useSidebar();
-  
+
   return (
-    <header className="md:hidden flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-background" suppressHydrationWarning>
+    <header
+      className="md:hidden flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-background"
+      suppressHydrationWarning
+    >
       <button
         onClick={() => setOpen(true)}
         className="p-2 hover:bg-accent rounded-md"
@@ -55,6 +58,22 @@ function MobileHeader() {
           PROTOTYPE
         </Badge>
         <ModeToggle />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="cursor-pointer">
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
@@ -74,14 +93,17 @@ export function DashboardLayoutWrapper({
         <div className="flex flex-col md:flex-row h-screen bg-background">
           {/* Mobile Header */}
           <MobileHeader />
-          
+
           <DashboardSidebar
             navigationItems={navigationItems}
             urlPathname={urlPathname}
           />
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Desktop Header - hidden on mobile since mobile header is separate */}
-            <header className="hidden md:flex h-16 shrink-0 items-center gap-2 border-b px-4" suppressHydrationWarning>
+            <header
+              className="hidden md:flex h-16 shrink-0 items-center gap-2 border-b px-4"
+              suppressHydrationWarning
+            >
               <div className="ml-auto flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
                   PROTOTYPE
@@ -90,7 +112,10 @@ export function DashboardLayoutWrapper({
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Avatar className="cursor-pointer">
-                      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                      />
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
@@ -105,7 +130,10 @@ export function DashboardLayoutWrapper({
                 </DropdownMenu>
               </div>
             </header>
-            <main className="flex-1 bg-background overflow-auto p-4 md:p-4 pt-2 md:pt-4" suppressHydrationWarning>
+            <main
+              className="flex-1 bg-background overflow-auto p-4 md:p-4 pt-2 md:pt-4"
+              suppressHydrationWarning
+            >
               <ErrorBoundary>{children}</ErrorBoundary>
             </main>
           </div>
