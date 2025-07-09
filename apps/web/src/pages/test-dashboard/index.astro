@@ -1,9 +1,127 @@
---- 
-import DashboardLayout from '@/layouts/DashboardLayout.astro';
-import { DashboardHome } from '@/components/DashboardHome';
+---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
+import { WelcomeBanner } from "@/components/dashboard/WelcomeBanner";
+import { RecentlySynced } from "@/components/dashboard/RecentlySynced";
+import { ConnectedServices } from "@/components/dashboard/ConnectedServices";
+import { QuickActions } from "@/components/dashboard/QuickActions";
+
+const mockData = {
+  user: {
+    name: "BossDaily",
+    totalPlaylists: 8,
+    totalServices: 4,
+  },
+  recentlySync: [
+    {
+      id: 1,
+      name: "Workout Bangers",
+      artwork: "🏋️",
+      sources: ["Spotify", "Apple Music"],
+      lastSync: "5 minutes ago",
+      status: "success",
+    },
+    {
+      id: 2,
+      name: "Chill Vibes",
+      artwork: "🌊",
+      sources: ["Spotify", "Deezer"],
+      lastSync: "2 hours ago",
+      status: "success",
+    },
+    {
+      id: 3,
+      name: "Rock Classics",
+      artwork: "🎸",
+      sources: ["Apple Music", "YouTube Music"],
+      lastSync: "1 day ago",
+      status: "success",
+    },
+    {
+      id: 4,
+      name: "Jazz Collection",
+      artwork: "🎷",
+      sources: ["Spotify", "Tidal"],
+      lastSync: "3 days ago",
+      status: "pending",
+    },
+    {
+      id: 5,
+      name: "Jazz Collezction",
+      artwork: "🎷",
+      sources: ["Spotify", "Tidal"],
+      lastSync: "3 days ago",
+      status: "pending",
+    },
+    {
+      id: 6,
+      name: "Jazz Colzlection",
+      artwork: "🎷",
+      sources: ["Spotify", "Tidal"],
+      lastSync: "3 days ago",
+      status: "pending",
+    },
+    {
+      id: 7,
+      name: "Jazz Collezction",
+      artwork: "🎷",
+      sources: ["Spotify", "Tidal"],
+      lastSync: "3 days ago",
+      status: "pending",
+    },
+    {
+      id: 8,
+      name: "Jazzz Collection",
+      artwork: "🎷",
+      sources: ["Spotify", "Tidal"],
+      lastSync: "3 days ago",
+      status: "pending",
+    },
+  ],
+  connectedServices: [
+    {
+      id: 1,
+      name: "Spotify",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/spotify.svg",
+      status: "connected",
+      playlistCount: 12,
+    },
+    {
+      id: 2,
+      name: "Apple Music",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/applemusic.svg",
+      status: "connected",
+      playlistCount: 8,
+    },
+    {
+      id: 3,
+      name: "YouTube Music",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/youtubemusic.svg",
+      status: "connected",
+      playlistCount: 5,
+    },
+    {
+      id: 4,
+      name: "Deezer",
+      logo: "/deezer2.svg", // Local path for simplicity
+      status: "connected",
+      playlistCount: 3,
+    },
+    {
+      id: 5,
+      name: "Tidal",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/tidal.svg",
+      status: "disconnected",
+      playlistCount: 0,
+    },
+  ],
+};
 ---
 
-
 <DashboardLayout pageTitle="Home">
-	<DashboardHome />
+  <div class="min-h-screen bg-background space-y-8 p-6">
+    <WelcomeBanner user={mockData.user} client:load />
+    <RecentlySynced playlists={mockData.recentlySync} client:load />
+    <ConnectedServices services={mockData.connectedServices} client:load />
+    <QuickActions client:load />
+  </div>
 </DashboardLayout>

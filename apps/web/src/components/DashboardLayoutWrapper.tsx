@@ -39,27 +39,15 @@ export function DashboardLayoutWrapper({
   children,
   urlPathname,
 }: DashboardLayoutWrapperProps) {
-  const updatedNavigationItems = navigationItems.map((item, index) => ({
-    ...item,
-    isActive: item.title === pageTitle,
-  }));
-
-  // Debug logging for key prop issues
-  React.useEffect(() => {
-    console.log('DashboardLayoutWrapper - Navigation Items:', updatedNavigationItems);
-    console.log('DashboardLayoutWrapper - Page Title:', pageTitle);
-    console.log('DashboardLayoutWrapper - URL Pathname:', urlPathname);
-  }, [updatedNavigationItems, pageTitle, urlPathname]);
-
   return (
     <ErrorBoundary>
     <SidebarProvider>
       <DashboardSidebar
-        navigationItems={updatedNavigationItems}
+        navigationItems={navigationItems}
         urlPathname={urlPathname}
       />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4" suppressHydrationWarning>
           <SidebarTrigger className="-ml-1" />
           <div className="ml-auto flex items-center gap-2">
             <Badge variant="secondary" className="text-xs">
@@ -84,7 +72,9 @@ export function DashboardLayoutWrapper({
             </DropdownMenu>
           </div>
         </header>
-        <ErrorBoundary>{children}</ErrorBoundary>
+        <main className="bg-background" suppressHydrationWarning>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </main>
       </SidebarInset>
     </SidebarProvider>
     </ErrorBoundary>

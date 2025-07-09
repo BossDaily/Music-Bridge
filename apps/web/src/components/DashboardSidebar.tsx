@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-  TrendingUp,
-  Music,
-  RotateCcw,
-  Shuffle,
-  Users,
-  Settings,
-  TestTube,
-  Home,
-} from "lucide-react";
+import React from "react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -21,7 +10,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import ErrorBoundary from "./ErrorBoundary";
 
@@ -70,23 +58,19 @@ export function DashboardSidebar({
               <SidebarGroupLabel>Application</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  {navigationItems.map((item, index) => (
-                    <SidebarMenuItem key={`nav-${item.id}-${index}`}>
+                  {navigationItems.map((item) => (
+                    <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton
                         isActive={item.url === urlPathname}
                         asChild
                       >
                         <a href={item.url}>
                           {typeof item.icon === "string" ? (
-                            <span key={`icon-string-${item.id}`}>
-                              {item.icon}
-                            </span>
+                            <span>{item.icon}</span>
                           ) : typeof item.icon === "function" ? (
-                            React.createElement(item.icon, {
-                              key: `icon-component-${item.id}`,
-                            })
+                            React.createElement(item.icon)
                           ) : null}
-                          <span key={`title-${item.id}`}>{item.title}</span>
+                          <span>{item.title}</span>
                         </a>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

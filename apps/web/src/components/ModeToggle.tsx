@@ -13,19 +13,32 @@ export function ModeToggle() {
   const [theme, setThemeState] = React.useState<
     "theme-light" | "dark" | "system"
   >("theme-light")
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
+    setMounted(true)
     const isDarkMode = document.documentElement.classList.contains("dark")
     setThemeState(isDarkMode ? "dark" : "theme-light")
   }, [])
 
   React.useEffect(() => {
+    if (!mounted) return
+    
     const isDark =
       theme === "dark" ||
       (theme === "system" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     document.documentElement.classList[isDark ? "add" : "remove"]("dark")
-  }, [theme])
+  }, [theme, mounted])
+
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="icon" suppressHydrationWarning>
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    )
+  }
 
   return (
     <DropdownMenu>

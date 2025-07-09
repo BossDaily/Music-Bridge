@@ -89,7 +89,7 @@ const urlPathname = Astro.url.pathname;
       userEmail="boss@example.com"
       pageTitle={pageTitle}
       urlPathname={urlPathname}
-      client:load
+      client:only="react"
     >
       <slot />
     </DashboardLayoutWrapper>
