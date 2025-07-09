@@ -1,5 +1,5 @@
 import React from 'react';
-import { SidebarProvider, SidebarInset, SidebarTrigger } from './ui/sidebar';
+import { SidebarProvider } from './ui/sidebar';
 import { DashboardSidebar } from './DashboardSidebar';
 import { Badge } from './ui/badge';
 import {
@@ -41,42 +41,43 @@ export function DashboardLayoutWrapper({
 }: DashboardLayoutWrapperProps) {
   return (
     <ErrorBoundary>
-    <SidebarProvider>
-      <DashboardSidebar
-        navigationItems={navigationItems}
-        urlPathname={urlPathname}
-      />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4" suppressHydrationWarning>
-          <SidebarTrigger className="-ml-1" />
-          <div className="ml-auto flex items-center gap-2">
-            <Badge variant="secondary" className="text-xs">
-              PROTOTYPE
-            </Badge>
-            <ModeToggle />
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar className="cursor-pointer">
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+      <SidebarProvider>
+        <div className="flex h-screen bg-background">
+          <DashboardSidebar
+            navigationItems={navigationItems}
+            urlPathname={urlPathname}
+          />
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4" suppressHydrationWarning>
+              <div className="ml-auto flex items-center gap-2">
+                <Badge variant="secondary" className="text-xs">
+                  PROTOTYPE
+                </Badge>
+                <ModeToggle />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="cursor-pointer">
+                      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Support</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </header>
+            <main className="flex-1 bg-background overflow-auto p-4" suppressHydrationWarning>
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </main>
           </div>
-        </header>
-        <main className="bg-background" suppressHydrationWarning>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
+        </div>
+      </SidebarProvider>
     </ErrorBoundary>
   );
 }
