@@ -82,7 +82,7 @@ const mockData = {
     {
       id: 4,
       name: "Deezer",
-      logo: "/deezer.svg", // Local path for simplicity
+      logo: "/deezer2.svg", // Local path for simplicity
       status: "connected",
       playlistCount: 3
     },
