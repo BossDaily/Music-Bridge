@@ -61,35 +61,35 @@ const mockData = {
     {
       id: 1,
       name: "Spotify",
-      logo: "🎵",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/spotify.svg",
       status: "connected",
       playlistCount: 12
     },
     {
       id: 2,
       name: "Apple Music",
-      logo: "🍎",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/applemusic.svg",
       status: "connected",
       playlistCount: 8
     },
     {
       id: 3,
       name: "YouTube Music",
-      logo: "📺",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/youtubemusic.svg",
       status: "connected",
       playlistCount: 5
     },
     {
       id: 4,
       name: "Deezer",
-      logo: "🎧",
+      logo: "/deezer.svg", // Local path for simplicity
       status: "connected",
       playlistCount: 3
     },
     {
       id: 5,
       name: "Tidal",
-      logo: "🌊",
+      logo: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/tidal.svg",
       status: "disconnected",
       playlistCount: 0
     }
@@ -222,8 +222,8 @@ export function DashboardHome() {
                 <CardContent className="p-4 lg:p-6">
                   <div className="text-center space-y-3 lg:space-y-4">
                     <div className="relative inline-block">
-                      <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-2xl lg:text-3xl mx-auto">
-                        {service.logo}
+                      <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-2xl lg:text-3xl mx-auto p-2 lg:p-3">
+                        <img src={service.logo} alt={`${service.name} logo`} className="w-full h-full dark:invert" />
                       </div>
                       <div className={`absolute -bottom-1 -right-1 w-5 h-5 lg:w-6 lg:h-6 rounded-full border-2 border-background ${getServiceStatusColor(service.status)}`}>
                         <span className="sr-only">Connected</span>
