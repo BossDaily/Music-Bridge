@@ -38,10 +38,10 @@ export function IconRenderer({
   
   // Default size classes based on variant if no className is provided
   const defaultClassName = variant === "small" 
-    ? "h-4 w-4" 
+    ? "h-4 w-4 min-h-4 min-w-4 flex-shrink-0" 
     : variant === "large" 
-    ? "h-6 w-6" 
-    : "h-5 w-5";
+    ? "h-6 w-6 min-h-6 min-w-6 flex-shrink-0" 
+    : "h-5 w-5 min-h-5 min-w-5 flex-shrink-0";
   
   const finalClassName = className || `${defaultClassName} text-neutral-700 dark:text-neutral-200`;
   

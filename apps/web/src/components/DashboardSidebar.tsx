@@ -45,7 +45,7 @@ export function DashboardSidebar({
     icon: (
       <IconRenderer 
         iconName={item.icon} 
-        className={`${open ? "h-5 w-5" : "h-6 w-6"} text-neutral-700 dark:text-neutral-200 transition-all duration-200`}
+        className="h-5 w-5 min-h-5 min-w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
       />
     ),
   }));
