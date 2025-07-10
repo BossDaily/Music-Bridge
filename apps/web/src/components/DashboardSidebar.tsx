@@ -9,6 +9,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { IconX } from "@tabler/icons-react";
 import ErrorBoundary from "./ErrorBoundary";
+import { IconRenderer } from "./IconRenderer";
 
 interface Links {
   label: string;
@@ -22,7 +23,7 @@ interface DashboardSidebarProps {
     id: string;
     title: string;
     url: string;
-    icon: React.ElementType | string;
+    icon: string; // Changed from React.ElementType | string to just string
     isActive?: boolean;
   }[];
 }
@@ -41,11 +42,12 @@ export function DashboardSidebar({
   const links: Links[] = navigationItems.map((item) => ({
     label: item.title,
     href: item.url,
-    icon: typeof item.icon === "string" ? (
-      <span>{item.icon}</span>
-    ) : typeof item.icon === "function" ? (
-      React.createElement(item.icon)
-    ) : null,
+    icon: (
+      <IconRenderer 
+        iconName={item.icon} 
+        className={`${open ? "h-5 w-5" : "h-6 w-6"} text-neutral-700 dark:text-neutral-200 transition-all duration-200`}
+      />
+    ),
   }));
 
   const SidebarContent = ({ isMobile = false }: { isMobile?: boolean }) => (
@@ -79,7 +81,9 @@ export function DashboardSidebar({
               )}
               onClick={() => setOpen(false)} // Close sidebar when link is clicked on mobile
             >
-              {link.icon}
+              <div className="flex-shrink-0">
+                {link.icon}
+              </div>
               <span className="text-sm font-medium">{link.label}</span>
             </a>
           ) : (
@@ -90,6 +94,7 @@ export function DashboardSidebar({
                 "hover:bg-accent hover:text-accent-foreground rounded-md px-2",
                 link.href === urlPathname && "bg-accent text-accent-foreground"
               )}
+              
             />
           )
         ))}

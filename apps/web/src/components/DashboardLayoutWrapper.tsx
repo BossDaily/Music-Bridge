@@ -19,7 +19,7 @@ interface NavigationItem {
   id: string;
   title: string;
   url: string;
-  icon: React.ElementType | string;
+  icon: string; // Changed from React.ElementType | string to just string
   isActive?: boolean;
 }
 
