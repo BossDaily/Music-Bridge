@@ -51,7 +51,7 @@ export function ConnectedServices({ services }: { services: any[] }) {
                     <CardContent className="p-3 lg:p-4">
                       <div className="text-center space-y-2 lg:space-y-3">
                         <div className="relative inline-block">
-                          <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-lg lg:text-xl mx-auto p-2">
+                          <div className="w-12 h-12 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-lg lg:text-xl mx-auto p-2">
                             <img
                               src={service.logo}
                               alt={`${service.name} logo`}

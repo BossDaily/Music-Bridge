@@ -65,9 +65,7 @@ export function DashboardSidebar({
       
       {/* Navigation Links */}
       <div className="flex flex-col space-y-2 flex-1 mt-4">
-        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
-          Application
-        </div>
+        
         {links.map((link, index) => (
           isMobile ? (
             // Custom mobile link that always shows text
@@ -91,7 +89,7 @@ export function DashboardSidebar({
               key={index} 
               link={link}
               className={cn(
-                "hover:bg-accent hover:text-accent-foreground rounded-md px-2",
+                "hover:bg-accent hover:text-accent-foreground rounded-md pl-0.5",
                 link.href === urlPathname && "bg-accent text-accent-foreground"
               )}
               
