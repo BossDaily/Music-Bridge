@@ -21,6 +21,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { TabsDemo } from "@/components/Demo/TabsDemo";
 import BadgesAndAvatars from "@/components/Demo/BadgesAndAvatars";
 import FormElements from "@/components/Demo/FormElements";
+import TableDemo from "@/components/Demo/TableDemo";
 ---
 
 <DashboardLayout pageTitle="Component Prototype">
@@ -124,6 +125,12 @@ import FormElements from "@/components/Demo/FormElements";
     <section class="space-y-4">
       <BadgesAndAvatars client:load />
     </section>
+    
+    <!-- Tables Section -->
+    <section class="space-y-4">
+      <TableDemo client:load />
+    </section>
+    
     <!-- Progress and Status -->
     <section class="space-y-4">
       <h2 class="text-2xl font-semibold">Progress & Status</h2>
