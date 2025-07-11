@@ -2,11 +2,28 @@ const { Hono } = require('hono');
 const { logger } = require('hono/logger');
 const { cors } = require('hono/cors');
 const { serve } = require('@hono/node-server');
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
 const { drizzle } = require('drizzle-orm/node-postgres');
 
-const db = drizzle(process.env.DATABASE_URL!);
+// Load environment variables from the root directory
+// Try multiple possible locations for the .env file
+const possibleEnvPaths = [
+  path.resolve(process.cwd(), '.env'),
+  path.resolve(__dirname, '../../../.env'),
+  path.resolve(__dirname, '../../.env'),
+];
 
+for (const envPath of possibleEnvPaths) {
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+    console.log(`Loaded environment variables from: ${envPath}`);
+    break;
+  }
+}
+
+const db = drizzle(process.env.DATABASE_URL!);
 const app = new Hono()
 
 // Middleware
