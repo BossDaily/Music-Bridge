@@ -2,6 +2,10 @@ const { Hono } = require('hono');
 const { logger } = require('hono/logger');
 const { cors } = require('hono/cors');
 const { serve } = require('@hono/node-server');
+import 'dotenv/config';
+const { drizzle } = require('drizzle-orm/node-postgres');
+
+const db = drizzle(process.env.DATABASE_URL!);
 
 const app = new Hono()
 
