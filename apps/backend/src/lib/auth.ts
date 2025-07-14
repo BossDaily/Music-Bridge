@@ -52,6 +52,11 @@ export const auth = betterAuth({
   },
   secret: process.env.BETTER_AUTH_SECRET!,
   baseURL: process.env.BETTER_AUTH_URL!,
+  trustedOrigins: [
+    'http://localhost:4321', // Astro frontend
+    'http://localhost:3000', // Alternative frontend port
+    'http://localhost:8000', // Backend URL
+  ],
   advanced: {
     generateId: () => {
       // Generate a custom ID format if needed
