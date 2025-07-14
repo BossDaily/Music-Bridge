@@ -16,7 +16,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
     if (response.ok) {
       const sessionData = await response.json();
-      if (sessionData.user && sessionData.session) {
+      if (sessionData && sessionData.user && sessionData.session) {
         context.locals.user = sessionData.user;
         context.locals.session = sessionData.session;
       } else {
