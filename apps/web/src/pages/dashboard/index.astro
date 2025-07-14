@@ -1,7 +1,54 @@
 ---
 import DashboardLayout from "@/layouts/DashboardLayout.astro";
+
+// Check if user is authenticated
+const user = Astro.locals.user;
+const session = Astro.locals.session;
+
+// Redirect to login if not authenticated
+if (!user || !session) {
+  return Astro.redirect('/login');
+}
 ---
 
 <DashboardLayout pageTitle="Home">
-  <p>Welcome to your dashboard!</p>
+  <div class="space-y-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold">Welcome back, {user.name}!</h1>
+        <p class="text-muted-foreground">Here's your music dashboard</p>
+      </div>
+    </div>
+    
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div class="bg-card border border-border rounded-lg p-6">
+        <h3 class="font-semibold mb-2">Connected Services</h3>
+        <p class="text-sm text-muted-foreground">No services connected yet</p>
+      </div>
+      
+      <div class="bg-card border border-border rounded-lg p-6">
+        <h3 class="font-semibold mb-2">Synced Playlists</h3>
+        <p class="text-sm text-muted-foreground">0 playlists</p>
+      </div>
+      
+      <div class="bg-card border border-border rounded-lg p-6">
+        <h3 class="font-semibold mb-2">Last Sync</h3>
+        <p class="text-sm text-muted-foreground">Never</p>
+      </div>
+    </div>
+    
+    <div class="bg-card border border-border rounded-lg p-6">
+      <h3 class="font-semibold mb-4">Quick Actions</h3>
+      <div class="grid gap-3 md:grid-cols-2">
+        <button class="p-3 border border-border rounded-lg text-left hover:bg-accent transition-colors">
+          <div class="font-medium">Connect Spotify</div>
+          <div class="text-sm text-muted-foreground">Link your Spotify account</div>
+        </button>
+        <button class="p-3 border border-border rounded-lg text-left hover:bg-accent transition-colors">
+          <div class="font-medium">Connect Apple Music</div>
+          <div class="text-sm text-muted-foreground">Link your Apple Music account</div>
+        </button>
+      </div>
+    </div>
+  </div>
 </DashboardLayout>

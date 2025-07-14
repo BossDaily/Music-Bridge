@@ -14,6 +14,7 @@ import { ModeToggle } from "./ModeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { IconMenu2 } from "@tabler/icons-react";
 import ErrorBoundary from "./ErrorBoundary";
+import { authClient } from "@/lib/auth-client";
 
 interface NavigationItem {
   id: string;
@@ -23,10 +24,16 @@ interface NavigationItem {
   isActive?: boolean;
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+}
+
 interface DashboardLayoutWrapperProps {
   navigationItems: NavigationItem[];
-  userName: string;
-  userEmail: string;
+  user?: User;
   pageTitle: string;
   children: React.ReactNode;
   urlPathname: string;
@@ -81,12 +88,35 @@ function MobileHeader() {
 
 export function DashboardLayoutWrapper({
   navigationItems,
-  userName,
-  userEmail,
+  user,
   pageTitle,
   children,
   urlPathname,
 }: DashboardLayoutWrapperProps) {
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            window.location.href = '/';
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
+  // Get user initials for avatar fallback
+  const getUserInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part.charAt(0))
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <ErrorBoundary>
       <SidebarProvider>
@@ -109,25 +139,38 @@ export function DashboardLayoutWrapper({
                   PROTOTYPE
                 </Badge>
                 <ModeToggle />
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Avatar className="cursor-pointer">
-                      <AvatarImage
-                        src="https://github.com/shadcn.png"
-                        alt="@shadcn"
-                      />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Support</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Avatar className="cursor-pointer">
+                        <AvatarImage
+                          src={user.image}
+                          alt={user.name}
+                        />
+                        <AvatarFallback>{getUserInitials(user.name)}</AvatarFallback>
+                      </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>
+                        <div>
+                          <div className="font-medium">{user.name}</div>
+                          <div className="text-xs text-muted-foreground">{user.email}</div>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Settings</DropdownMenuItem>
+                      <DropdownMenuItem>Support</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={handleLogout}>
+                        Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Avatar className="cursor-pointer">
+                    <AvatarFallback>?</AvatarFallback>
+                  </Avatar>
+                )}
               </div>
             </header>
             <main

@@ -2,13 +2,22 @@
 import { DashboardLayoutWrapper } from '@/components/DashboardLayoutWrapper';
 import '@/styles/global.css';
 
+// Get user from Astro locals
+const user = Astro.locals.user;
+
 // Navigation items for the sidebar
 const navigationItems = [
   {
     id: "home",
     title: "Home",
-    url: "/test-dashboard",
+    url: "/dashboard",
     icon: "Home",
+  },
+  {
+    id: "demo",
+    title: "Demo Dashboard",
+    url: "/test-dashboard",
+    icon: "TestTube",
   },
   {
     id: "global-playlists",
@@ -84,8 +93,7 @@ const urlPathname = Astro.url.pathname;
   <body>
     <DashboardLayoutWrapper
       navigationItems={navigationItems}
-      userName="BossDaily"
-      userEmail="boss@example.com"
+      user={user || undefined}
       pageTitle={pageTitle}
       urlPathname={urlPathname}
       client:only="react"
