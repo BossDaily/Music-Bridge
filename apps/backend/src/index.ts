@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 const { drizzle } = require('drizzle-orm/node-postgres');
+import { auth } from './lib/auth';
 
 // Load environment variables from the root directory
 // Try multiple possible locations for the .env file
@@ -41,6 +42,11 @@ app.get('/', (c) => {
     status: 'healthy'
   })
 })
+
+// Better Auth routes
+app.on(['POST', 'GET'], '/api/auth/*', async (c) => {
+  return auth.handler(c.req.raw);
+});
 
 app.get('/api/health', (c) => {
   return c.json({
