@@ -33,18 +33,24 @@ services:
     networks:
       - music-bridge-network
 
-  # Optional: Add a reverse proxy (nginx)
-  nginx:
-    image: nginx:alpine
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
     ports:
-      - "80:80"
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=musicbridge
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - backend
-      - web
+      - music-bridge-data:/var/lib/postgresql/data
     networks:
       - music-bridge-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   music-bridge-network:
