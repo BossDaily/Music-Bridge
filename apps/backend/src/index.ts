@@ -1,11 +1,12 @@
-const { Hono } = require('hono');
-const { logger } = require('hono/logger');
-const { cors } = require('hono/cors');
-const { serve } = require('@hono/node-server');
+import { Hono } from 'hono';
+import { logger } from 'hono/logger';
+import { cors } from 'hono/cors';
+import { serve } from '@hono/node-server';
+import type { Context } from 'hono';
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
-const { drizzle } = require('drizzle-orm/node-postgres');
+import { drizzle } from 'drizzle-orm/node-postgres';
 import { auth } from './lib/auth';
 
 // Load environment variables from the root directory
@@ -35,7 +36,7 @@ app.use('*', cors({
 }))
 
 // Routes
-app.get('/', (c) => {
+app.get('/', (c: Context) => {
   return c.json({
     message: 'Music Bridge Backend API',
     version: '1.0.0',
@@ -44,11 +45,11 @@ app.get('/', (c) => {
 })
 
 // Better Auth routes
-app.on(['POST', 'GET'], '/api/auth/*', async (c) => {
+app.on(['POST', 'GET'], '/api/auth/*', async (c: Context) => {
   return auth.handler(c.req.raw);
 });
 
-app.get('/api/health', (c) => {
+app.get('/api/health', (c: Context) => {
   return c.json({
     status: 'ok',
     timestamp: new Date().toISOString()
@@ -56,7 +57,7 @@ app.get('/api/health', (c) => {
 })
 
 // Music-related endpoints
-app.get('/api/tracks', (c) => {
+app.get('/api/tracks', (c: Context) => {
   return c.json({
     tracks: [
       { id: 1, title: 'Sample Track 1', artist: 'Artist 1', duration: 180 },
@@ -65,7 +66,7 @@ app.get('/api/tracks', (c) => {
   })
 })
 
-app.post('/api/tracks', async (c) => {
+app.post('/api/tracks', async (c: Context) => {
   const body = await c.req.json()
   return c.json({
     message: 'Track created',
