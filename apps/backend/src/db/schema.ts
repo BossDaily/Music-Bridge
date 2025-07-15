@@ -22,8 +22,9 @@ export const syncStatus = pgEnum('sync_status', ['pending', 'in_progress', 'succ
 
 export const users = pgTable('users', {
   id: text('id').primaryKey(),
-  name: text('name').notNull(),
+  name: text('name').notNull().default(''), // Make name have a default value
   email: text('email').notNull().unique(),
+  emailVerified: boolean('email_verified').notNull().default(false),
   image: text('image'),
   role: userRole('role').notNull().default('user'),
   createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow(),

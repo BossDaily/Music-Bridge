@@ -39,6 +39,29 @@ export const auth = betterAuth({
     requireEmailVerification: false, // No email verification - email is just a username
     autoSignIn: true, // Automatically sign in after registration
   },
+  hooks: {
+    user: {
+      created: async (user) => {
+        // If no name is provided, use the email as the name
+        if (!user.name || user.name.trim() === '') {
+          return {
+            ...user,
+            name: user.email.split('@')[0], // Use the part before @ as name
+          };
+        }
+        return user;
+      },
+    },
+  },
+  user: {
+    additionalFields: {
+      name: {
+        type: "string",
+        required: false, // Make name optional
+        defaultValue: "", // Provide default value
+      },
+    },
+  },
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
     updateAge: 60 * 60 * 24, // 1 day

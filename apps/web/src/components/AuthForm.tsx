@@ -57,15 +57,14 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
     setSuccess(null);
 
     const formData = new FormData(event.currentTarget);
-    const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
     try {
       const result = await authClient.signUp.email({
-        name,
         email,
         password,
+        name: email.split('@')[0], // Use the part before @ as name
       });
 
       if (result.error) {
@@ -134,17 +133,6 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
 
           <TabsContent value="signup">
             <form onSubmit={handleSignUp} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="signup-name">Name</Label>
-                <Input
-                  id="signup-name"
-                  name="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="signup-email">Email</Label>
                 <Input
